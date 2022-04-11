@@ -90,7 +90,6 @@ public class UserController {
                              @PathVariable(name ="user") User chanel,
                              Model model){
         UserService.sub(sub,chanel);
-
         return "redirect:/userMessages/"+chanel.getId();
     }
 
@@ -107,10 +106,12 @@ public class UserController {
                           @PathVariable String type){
         model.addAttribute("userToCheck",user.getUsername());
         model.addAttribute("type",type);
-        if("subscription".equals(type)){
+        if("subscriptions".equals(type)){
             model.addAttribute("userList",user.getSubscriptions());
+            System.out.println("crypt");
         }else{
             model.addAttribute("userList",user.getUser_subs());
+            System.out.println("subs");
         }
         return "sub";
     }

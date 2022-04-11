@@ -6,7 +6,7 @@
     <ul class="list-group">
         <#list userList as user>
             <li class="list-group-item">
-                <a href="/user-messages/${user.id}">${user.getUsername()}</a>
+                <a href="/userMessages/${user.id}">${user.getUsername()}</a>
             </li>
         </#list>
     </ul>

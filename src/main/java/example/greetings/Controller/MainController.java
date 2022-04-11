@@ -165,7 +165,9 @@ public class MainController {
             model.addAttribute("message",message);
 
         }
-        model.addAttribute("isSub",user.getUser_subs().contains(user));
+        model.addAttribute("isSub",user.getUser_subs().contains(CurrentUser));
+        System.out.println(user.getUser_subs().contains(CurrentUser));
+        System.out.println(user.getSubscriptions().contains(CurrentUser));
         model.addAttribute("subs",user.getUser_subs().size());
         model.addAttribute("subscriptions",user.getSubscriptions().size());
         model.addAttribute("isCurrentUser",CurrentUser.equals(user));

@@ -24,11 +24,11 @@ public class UserService implements UserDetailsService {
     private MailSenderService mailSenderService;
 
     public static void sub(User sub, User chanel) {
-        chanel.getSubscriptions().add(sub);
+        chanel.getUser_subs().add(sub);
     }
 
     public static void unsub(User sub, User chanel) {
-        chanel.getSubscriptions().remove(sub);
+        chanel.getUser_subs().remove(sub);
     }
 
 //    @Autowired
