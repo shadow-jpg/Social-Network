@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Diploma-master" />
+        <module name="base-capthca" />
+        <module name="base-admin" />
+        <module name="base-ServiceAuth" />
+        <module name="Kursach-master" />
+        <module name="greetings" />
+        <module name="base-styles" />
+        <module name="base-Security" />
+        <module name="base-Delete" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Diploma-master" options="-parameters" />
+      <module name="Kursach-master" options="-parameters" />
+      <module name="base-Delete" options="-parameters" />
+      <module name="base-Security" options="-parameters" />
+      <module name="base-ServiceAuth" options="-parameters" />
+      <module name="base-admin" options="-parameters" />
+      <module name="base-capthca" options="-parameters" />
+      <module name="base-styles" options="-parameters" />
+      <module name="greetings" options="-parameters" />
+    </option>
+  </component>
+</project>
