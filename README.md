@@ -50,6 +50,8 @@ fixed issue with changing data on changeSecurity  get 09/04 decided 09/05
 
 fixed of application and home same link on your messages 09/05 ????
 
+fixed URI then user write non-existing id in path get,but using EXCEPTION HANDLER 09/05 done 09/05 ?????
+
 -----------------------------------------------------------------------
 
 NEED to fix filter and non-working pictures
@@ -57,6 +59,7 @@ NEED to fix filter and non-working pictures
 NEED to add more modifications of admin and variants of use 09/04
 
 need to fix FAQ 09/05
+
 
 -----------------------------------------------------------------------
 

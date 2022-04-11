@@ -2,6 +2,7 @@ package example.greetings.Controller;
 
 import com.mysql.cj.util.StringUtils;
 import com.sun.istack.NotNull;
+import com.sun.mail.iap.Response;
 import example.greetings.Models.Message;
 import example.greetings.Models.User;
 import example.greetings.interfaces.MessageRepo;
@@ -12,10 +13,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.MissingPathVariableException;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -26,6 +25,8 @@ import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 
 @Controller
@@ -43,6 +44,10 @@ public class MainController {
     private  String deletepath;
 
 
+    @ExceptionHandler(MissingPathVariableException.class)
+    public String testExceptionHandler() {
+        return "PageNotFound";
+    }
 
     private void saveFile(MultipartFile file, Message message) throws IOException {
         if (file != null && !file.getOriginalFilename().isEmpty()){
@@ -145,6 +150,7 @@ public class MainController {
 
 
 
+
     @GetMapping("/chat")
     public String chat(@AuthenticationPrincipal User user,
                        Model model){
@@ -154,13 +160,14 @@ public class MainController {
     }
 
 
+
+
     @GetMapping("/userMessages/{user}")
     public String userMessages(@AuthenticationPrincipal User CurrentUser,
                                @PathVariable User user,
                                Model model,
                                @RequestParam(required = false) Message message,
-                               @RequestParam(required = false, defaultValue = "") String filter){
-
+                               @RequestParam(required = false, defaultValue = "") String filter) throws MissingPathVariableException{
         Iterable<Message> messages =user.getMessages();
 
         if(message==null) {
@@ -216,7 +223,7 @@ public class MainController {
     }
 
     @GetMapping(value = "/userDelete/{user}")
-    public String userDelete(@AuthenticationPrincipal User CurrentUser,
+    public String userMessageDelete(@AuthenticationPrincipal User CurrentUser,
                              @PathVariable User user,
                              Model model,
                              @RequestParam(value = "message") Long id) throws IOException {
