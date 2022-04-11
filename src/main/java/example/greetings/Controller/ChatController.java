@@ -13,6 +13,7 @@ import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +25,16 @@ public class ChatController {
 
     @Autowired
     private UserRepo userRepo;
+
+
+    @GetMapping("/chat")
+    public String chat(@AuthenticationPrincipal User user,
+                       Model model){
+
+        model.addAttribute("userName", user.getUsername());
+        return "chat";
+    }
+
 
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")

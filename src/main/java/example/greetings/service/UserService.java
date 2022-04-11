@@ -23,6 +23,14 @@ public class UserService implements UserDetailsService {
     @Autowired
     private MailSenderService mailSenderService;
 
+    public static void sub(User sub, User chanel) {
+        chanel.getSubscriptions().add(sub);
+    }
+
+    public static void unsub(User sub, User chanel) {
+        chanel.getSubscriptions().remove(sub);
+    }
+
 //    @Autowired
 //    private PasswordEncoder passwordEncoder;
 

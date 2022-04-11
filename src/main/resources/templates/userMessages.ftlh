@@ -8,9 +8,9 @@
         <div class="my-3">
             <#if !isCurrentUser>
                 <#if isSub>
-                    <a href="/user/subscribe/${userPage.id}"> <button type="button" class="btn btn-dark">Subscribe</button></a>
+                    <a href="/user/subscribe/${userPage.id}"> <button type="button" class="btn btn-dark" value="unsub">Subscribe</button></a>
                 <#else>
-                <a href="/user/unsubscribe/${userPage.id}"><button type="button" class="btn btn-dark">Unsubscribe</button></a>
+                <a href="/user/unsubscribe/${userPage.id}"><button type="button" class="btn btn-dark" value="sub">Unsubscribe</button></a>
                 </#if>
             </#if>
         </div>

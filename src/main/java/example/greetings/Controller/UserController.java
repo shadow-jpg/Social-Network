@@ -4,6 +4,7 @@ import example.greetings.Models.Role;
 import example.greetings.Models.User;
 import example.greetings.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -84,12 +85,34 @@ public class UserController {
         }
     }
 
-//    @PostMapping("/subscribe/${user}")
-//    public  String subscribe(@AuthenticationPrincipal User sub,
-//                             @PathVariable User channel,
-//                             Model model){
-//        return "main";
-//        // return "redirect:/userMessages/"+channel.getId();
-//    }
+    @GetMapping("/subscribe/{user}")
+    public  String subscribe(@AuthenticationPrincipal User sub,
+                             @PathVariable(name ="user") User chanel,
+                             Model model){
+        UserService.sub(sub,chanel);
+
+        return "redirect:/userMessages/"+chanel.getId();
+    }
+
+    @GetMapping("/unsubscribe/{user}")
+    public  String unsubscribe(@AuthenticationPrincipal User sub,
+                             @PathVariable(name ="user") User chanel,
+                             Model model){
+        UserService.unsub(sub,chanel);
+        return "redirect:/userMessages/"+chanel.getId();
+    }
+    @GetMapping("{type}/{user}/list")
+    public String subList(Model model,
+                          @PathVariable User user,
+                          @PathVariable String type){
+        model.addAttribute("userToCheck",user.getUsername());
+        model.addAttribute("type",type);
+        if("subscription".equals(type)){
+            model.addAttribute("userList",user.getSubscriptions());
+        }else{
+            model.addAttribute("userList",user.getUser_subs());
+        }
+        return "sub";
+    }
 
 }

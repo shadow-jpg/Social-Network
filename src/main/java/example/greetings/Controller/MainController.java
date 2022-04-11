@@ -2,7 +2,6 @@ package example.greetings.Controller;
 
 import com.mysql.cj.util.StringUtils;
 import com.sun.istack.NotNull;
-import com.sun.mail.iap.Response;
 import example.greetings.Models.Message;
 import example.greetings.Models.User;
 import example.greetings.interfaces.MessageRepo;
@@ -10,7 +9,6 @@ import example.greetings.interfaces.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.MissingPathVariableException;
@@ -21,12 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.nio.file.attribute.UserPrincipalNotFoundException;
-import java.util.Optional;
-import java.util.Set;
 import java.util.UUID;
-
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 
 @Controller
@@ -146,17 +139,6 @@ public class MainController {
         model.addAttribute("messages", messages);
         return "main";
 
-    }
-
-
-
-
-    @GetMapping("/chat")
-    public String chat(@AuthenticationPrincipal User user,
-                       Model model){
-
-        model.addAttribute("userName", user.getUsername());
-        return "chat";
     }
 
 
