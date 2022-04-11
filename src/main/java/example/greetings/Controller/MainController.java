@@ -165,11 +165,11 @@ public class MainController {
 
         if(message==null) {
 //            if(filter != null && !filter.isEmpty()){
-//               Iterable<Message> messageOf =messageRepo.findByTag(filter);
+//               Iterable<Message> messageOf =messages.findByTag(filter);
 //            }else{
-//                Iterable<Message> messageOf =messageRepo.findAll();
+//                Iterable<Message> messageOf =messages.findAll();
 //            }
-//            model.addAttribute("filter", filter);
+            model.addAttribute("filter", filter);
 
             model.addAttribute("messages", messages);
         }else{

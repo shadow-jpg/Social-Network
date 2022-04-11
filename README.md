@@ -33,6 +33,7 @@ added searching of user on main page 09/04
 
 added subscriptions and subs 09/05
 
+
 -----------------------------------------------------------------------
 
 changed my profile page on changeSecurity 09/04
@@ -47,11 +48,11 @@ fixed add validation of user change name 09/04
 
 fixed issue with changing data on changeSecurity  get 09/04 decided 09/05
 
+fixed of application and home same link on your messages 09/05 ????
+
 -----------------------------------------------------------------------
 
 NEED to fix filter and non-working pictures
-
-need fix of application and home same link
 
 NEED to add more modifications of admin and variants of use 09/04
 
@@ -62,6 +63,5 @@ need to fix FAQ 09/05
 asked about personal chat
 
 asked about comments and video/files docx etc
-
 
 Asked about smtp rework
