@@ -47,6 +47,8 @@ fixed of application and home same link on your messages 09/05 ????
 
 fixed URI then user write non-existing id in path get,but using EXCEPTION HANDLER 09/05 done 09/05 ?????
 
+fixed auto-test created special table for test 09/18
+
 -----------------------------------------------------------------------
 
 NEED to fix filter and non-working pictures
