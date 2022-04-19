@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -43,6 +44,8 @@ public class LoginTest {
                 .andExpect(redirectedUrl("http://localhost/login")); // проверка redirect
     }
 
+    @Sql( value = {"/user-creation.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql( value = {"/user_delete.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
     public void correctLoginTest() throws Exception{
         this.mockMvc.perform(formLogin().user("w0").password("w")) //login

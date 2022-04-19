@@ -33,27 +33,28 @@ public class MessageControllerTest {
     @Autowired
     private MessageController controller;
 
-    //долбанные гуки pagination ломает все
-//    @Test
-//    public void newsTest() throws  Exception{
-//        this.mockMvc.perform(get("/news"))
-//                .andDo(print())
-//                .andExpect(authenticated())
-//                .andExpect(xpath("//div[@id='navbarSupportedContent']/div").string("w0"));
-//    }
-
-//    @Test
-//    public void newsListTest() throws Exception{
-//        this.mockMvc.perform(get("/news"))
-//                .andDo(print())
-//                .andExpect(authenticated())
-//                .andExpect(xpath("//div[@id='navbarSupportedContent']/div").nodeCount(0));
-//    }
-
     @Test
-        public void incomeTest() throws Exception{
+    public void AuthenticationByDefaultTest() throws Exception{
         this.mockMvc.perform(get("/news"))
                 .andDo(print())
                 .andExpect(authenticated());
+    } //если не работает этот метод не работает вся бд
+
+    @Test
+    public void newsTest() throws  Exception{
+        this.mockMvc.perform(get("/news"))
+                .andDo(print())
+                .andExpect(authenticated())
+                .andExpect(xpath("//div[@id='navbarSupportedContent']/div").string("w0"));
     }
+
+    @Test
+    public void newsListTest() throws Exception{
+        this.mockMvc.perform(get("/news"))
+                .andDo(print())
+                .andExpect(authenticated())
+                .andExpect(xpath("//div[@id='navbarSupportedContent']/div").nodeCount(0));
+    }
+
+
 }
