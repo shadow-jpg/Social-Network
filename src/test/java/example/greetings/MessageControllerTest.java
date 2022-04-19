@@ -11,10 +11,15 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.nio.charset.StandardCharsets;
+
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -39,6 +44,32 @@ public class MessageControllerTest {
                 .andDo(print())
                 .andExpect(authenticated());
     } //если не работает этот метод не работает вся бд
+
+    @Test
+    public void  addSimpleMessage() throws Exception{
+        MockHttpServletRequestBuilder multipart = multipart("/main")
+                .param("tag","new one")
+                .param("text", "fifth")
+                .with(csrf());
+        this.mockMvc.perform( multipart)
+                .andDo(print())
+                .andExpect(authenticated());
+                //.andExpect() добавить проверку с вывода когда починю freemarker под pagination
+    }
+
+    //подправить в последствии на обычный файл и сделать проверку на корректность
+    @Test
+    public void  addMessageWithFile() throws Exception{
+        MockHttpServletRequestBuilder multipart = multipart("/main")
+                .file("file","12313131313".getBytes())
+                .param("tag","new one")
+                .param("text", "fifth")
+                .with(csrf());
+        this.mockMvc.perform( multipart)
+                .andDo(print())
+                .andExpect(authenticated());
+        //.andExpect() добавить проверку с вывода когда починю freemarker под pagination
+    }
 
     @Test
     public void newsTest() throws  Exception{
