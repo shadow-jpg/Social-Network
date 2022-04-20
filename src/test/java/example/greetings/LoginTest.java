@@ -1,6 +1,6 @@
 package example.greetings;
 
-import example.greetings.Controller.MessageController;
+import example.greetings.Controller.PostController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class LoginTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private MessageController controller;
+    private PostController controller;
 
     @Test
     public void testHelloPage() throws Exception{

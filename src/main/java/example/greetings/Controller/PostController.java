@@ -28,7 +28,7 @@ import java.util.UUID;
 
 
 @Controller
-public class MessageController {
+public class PostController {
     @Autowired
     UserRepo userRepo;
 

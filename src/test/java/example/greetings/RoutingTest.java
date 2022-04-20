@@ -1,7 +1,7 @@
 package example.greetings;
 
 
-import example.greetings.Controller.MessageController;
+import example.greetings.Controller.PostController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class RoutingTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private MessageController controller;
+    private PostController controller;
 
     @Test
     public void TestNoRegistrationOne() throws  Exception{
@@ -44,7 +44,6 @@ public class RoutingTest {
                 .andExpect(redirectedUrl("http://localhost/register"));
     }
 
-
     @WithUserDetails("Alex")
     @Test
     public void TestRegisteredRedirectNoRightsUser() throws  Exception{
@@ -54,6 +53,21 @@ public class RoutingTest {
                 .andExpect(redirectedUrl("/news"));
     }
 
+    @WithUserDetails("Alex")
+    @Test
+    public void TestRegisteredRedirectNoRightsUserFIX() throws  Exception{
+        this.mockMvc.perform(get("/user"))
+                .andDo(print())
+                .andExpect(status().isForbidden());
+    }
+
+    @WithUserDetails("w0")
+    @Test
+    public void TestRegisteredRedirectNoRightsModeratorFIX() throws  Exception{
+        this.mockMvc.perform(get("/user"))
+                .andDo(print())
+                .andExpect(status().isForbidden());
+    }
     @WithUserDetails("w0")
     @Test
     public void TestRegisteredRedirectNoRightsModerator() throws  Exception{
