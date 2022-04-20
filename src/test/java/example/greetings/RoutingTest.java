@@ -31,7 +31,7 @@ public class RoutingTest {
 
     @Test
     public void TestNoRegistrationOne() throws  Exception{
-        this.mockMvc.perform(get("/main"))
+        this.mockMvc.perform(get("/news"))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("http://localhost/login"));
@@ -51,7 +51,7 @@ public class RoutingTest {
         this.mockMvc.perform(get("/user"))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/main"));
+                .andExpect(redirectedUrl("/news"));
     }
 
     @WithUserDetails("w0")
@@ -60,7 +60,7 @@ public class RoutingTest {
         this.mockMvc.perform(get("/user"))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/main"));
+                .andExpect(redirectedUrl("/news"));
     }
 
     @WithUserDetails("Nick")
@@ -86,12 +86,10 @@ public class RoutingTest {
         this.mockMvc.perform(get("/chat"))
                 .andDo(print())
                 .andExpect(status().isOk());
-        this.mockMvc.perform(get("/"))
-                .andDo(print())
-                .andExpect(status().isOk());
         this.mockMvc.perform(get("/profile"))
                 .andDo(print())
                 .andExpect(status().isOk());
+
         this.mockMvc.perform(get("/user/changeSecurity"))
                 .andDo(print())
                 .andExpect(status().isOk());
@@ -112,9 +110,7 @@ public class RoutingTest {
         this.mockMvc.perform(get("/chat"))
                 .andDo(print())
                 .andExpect(status().isOk());
-        this.mockMvc.perform(get("/"))
-                .andDo(print())
-                .andExpect(status().isOk());
+
         this.mockMvc.perform(get("/profile"))
                 .andDo(print())
                 .andExpect(status().isOk());
@@ -136,10 +132,6 @@ public class RoutingTest {
                 .andExpect(status().isOk());
 
         this.mockMvc.perform(get("/news"))
-                .andDo(print())
-                .andExpect(status().isOk());
-
-        this.mockMvc.perform(get("/"))
                 .andDo(print())
                 .andExpect(status().isOk());
 
@@ -169,10 +161,6 @@ public class RoutingTest {
                 .andExpect(status().isOk());
 
         this.mockMvc.perform(get("/news"))
-                .andDo(print())
-                .andExpect(status().isOk());
-
-        this.mockMvc.perform(get("/"))
                 .andDo(print())
                 .andExpect(status().isOk());
 
