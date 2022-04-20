@@ -44,14 +44,6 @@ public class RoutingTest {
                 .andExpect(redirectedUrl("http://localhost/register"));
     }
 
-    @WithUserDetails("w0")
-    @Test
-    public void TestRegistrationNews() throws  Exception{
-        this.mockMvc.perform(get("/news"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(forwardedUrl("/news"));
-    }
 
     @WithUserDetails("Alex")
     @Test
@@ -127,6 +119,39 @@ public class RoutingTest {
                 .andDo(print())
                 .andExpect(status().isOk());
 
+        this.mockMvc.perform(get("/user/changeSecurity"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @WithUserDetails("Admin")
+    @Test
+    public void TestRegisteredAllPagesAdmin() throws  Exception{
+        this.mockMvc.perform(get("/user"))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        this.mockMvc.perform(get("/user/1"))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        this.mockMvc.perform(get("/news"))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        this.mockMvc.perform(get("/"))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        this.mockMvc.perform(get("/chat"))
+                .andDo(print())
+                .andExpect(status().isOk());
+        this.mockMvc.perform(get("/"))
+                .andDo(print())
+                .andExpect(status().isOk());
+        this.mockMvc.perform(get("/profile"))
+                .andDo(print())
+                .andExpect(status().isOk());
         this.mockMvc.perform(get("/user/changeSecurity"))
                 .andDo(print())
                 .andExpect(status().isOk());

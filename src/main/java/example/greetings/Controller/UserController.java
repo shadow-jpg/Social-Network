@@ -21,14 +21,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUPERADMIN')")
     @GetMapping
     public String userList(Model model) {
         model.addAttribute("users", userService.findAll());
         return "userList";
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUPERADMIN')")
     @GetMapping("{user}")
     public String userEditForm(@PathVariable User user,
                                @RequestParam(required = false) String warning,
@@ -41,7 +41,7 @@ public class UserController {
         return "userEdit";
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUPERADMIN')")
     @PostMapping
     public String userSave(@RequestParam String username,
                            @RequestParam Map<String, String> form,
