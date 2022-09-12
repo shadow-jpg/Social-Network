@@ -85,4 +85,17 @@ class UserServiceTest {
 
         Mockito.verify(userRepo, Mockito.times(1)).save(user);
     }
+
+    @Test
+    public void activateUserFailed() {
+
+        User user =new User();
+
+        boolean isActivated =userService.activateUser("activation fail");
+
+        Assert.assertFalse(isActivated);
+        Assert.assertNull(user.getActivationCode());
+
+        Mockito.verify(userRepo, Mockito.times(0)).save(user);
+    }
 }
