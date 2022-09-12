@@ -21,6 +21,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(PostController.class);
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUPERADMIN')")
     @GetMapping
     public String userList(Model model) {
@@ -33,6 +34,7 @@ public class UserController {
     public String userEditForm(@PathVariable User user,
                                @RequestParam(required = false) String warning,
                                Model model) {
+
         model.addAttribute("user", user);
         model.addAttribute("roles", Role.values());
         if (warning != null && !warning.isEmpty()) {
@@ -43,13 +45,16 @@ public class UserController {
 
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUPERADMIN')")
     @PostMapping
-    public String userSave(@RequestParam String username,
+    public String userSave(@AuthenticationPrincipal User CurrentUser,
+                           @RequestParam String username,
                            @RequestParam Map<String, String> form,
                            @RequestParam("userId") User user,
                            RedirectAttributes redirectAttributes) {
         if (userService.saveUser(user, username, form) == null) {
+            logger.info("Администратор {} изменил имя пользователя:{} на {}.",CurrentUser.getUsername(),user.getUsername(),username);
             return "redirect:/user";
         } else {
+            logger.info("Администратор {} пытался изменить имя пользователя {} на {}.Но оно существует.",CurrentUser.getUsername(),username,user.getUsername());
             String warning = "already exist";
             redirectAttributes.addAttribute("warning", warning);
             return "redirect:/user/" + user.getId();
@@ -78,8 +83,10 @@ public class UserController {
         model.addAttribute("username", user.getUsername());
         model.addAttribute("email", user.getEmail());
         if (resultData == null) {
+            logger.info("Пользователь {} сменил свои данные",user.getUsername());
             return "changeSecurity";
         } else {
+            logger.info("Пользователь {} пытался сменить свои данные",user.getUsername());
             model.addAttribute("warning", resultData);
             return "changeSecurity";
         }

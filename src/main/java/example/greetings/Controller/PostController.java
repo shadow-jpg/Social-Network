@@ -42,10 +42,14 @@ public class PostController {
     private String deletepath;
 
 
-    @ExceptionHandler(MissingPathVariableException.class)
+    @ExceptionHandler({MissingPathVariableException.class})
     public String testExceptionHandler() {
+//        logger.info("Пользователь пытался пройти по несуществующему адрессу {}", e)
         return "PageNotFound";
     }
+
+
+    org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(PostController.class);
 
     private void saveFile(MultipartFile file,
                           Message message) throws IOException {
@@ -222,10 +226,13 @@ public class PostController {
         if (CurrentUser.canModerate()) {
             fileRemove(id);
             messageRepo.deleteById(id);
+            logger.info("Представитель администрации {} удалил сообщение пользователя: {}.",CurrentUser.getUsername(),user.getUsername());
 
         } else if (CurrentUser.equals(user)) {
             fileRemove(id);
             messageRepo.deleteById(id);
+        } else{
+            logger.warn("Несанкционнированная попытка доступа к удалению сообщений пользователем {}.",CurrentUser.getUsername());
         }
 
         return "redirect:/userMessages/" + user.getId();

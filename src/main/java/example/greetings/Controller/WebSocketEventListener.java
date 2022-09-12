@@ -32,7 +32,7 @@ public class WebSocketEventListener {
         String username = (String) headerAccessor.getSessionAttributes().get("username");
 
         if(username != null) {
-            logger.info("User Disconnected : " + username);
+            logger.info("User Disconnected : ", username);
         }
     }
 
