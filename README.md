@@ -37,6 +37,8 @@ added pagination get 04/12 done 04/16
 
 added a few auto-test get 04/12 done 04/18
 
+added simple console logger 12/09
+
 -----------------------------------------------------------------------
 
 changed my profile page on changeSecurity 04/04
@@ -66,6 +68,8 @@ Need to fix pagination on user page 04/16
 Need to fix issue when you're on last page and change pagination size to bigger give same already non-existing-page  04/18
 
 Need to fix issue with routing on unable pages for upper authorities 04/20
+
+Need to add file logging
 
 -----------------------------------------------------------------------
 
